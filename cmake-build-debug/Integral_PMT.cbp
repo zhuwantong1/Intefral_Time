@@ -104,6 +104,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="D:/cubecode/Integral_PMT/Core/Inc/AD9268.h">
+			<Option target="Integral_PMT.elf"/>
+		</Unit>
 		<Unit filename="D:/cubecode/Integral_PMT/Core/Inc/gpio.h">
 			<Option target="Integral_PMT.elf"/>
 		</Unit>
@@ -126,6 +129,9 @@
 			<Option target="Integral_PMT.elf"/>
 		</Unit>
 		<Unit filename="D:/cubecode/Integral_PMT/Core/Inc/usart.h">
+			<Option target="Integral_PMT.elf"/>
+		</Unit>
+		<Unit filename="D:/cubecode/Integral_PMT/Core/Src/AD9268.c">
 			<Option target="Integral_PMT.elf"/>
 		</Unit>
 		<Unit filename="D:/cubecode/Integral_PMT/Core/Src/gpio.c">

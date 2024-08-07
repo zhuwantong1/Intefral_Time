@@ -31,6 +31,12 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "retarget.h"
+
+
+
+
+
 
 /* USER CODE END Includes */
 
@@ -41,7 +47,10 @@ extern "C" {
 
 /* Exported constants --------------------------------------------------------*/
 /* USER CODE BEGIN EC */
-
+extern int G_Encoder[];
+extern uint16_t G_AdcValue[];
+extern uint8_t G_AdcValue_U8[];
+extern uint16_t G_Count;
 /* USER CODE END EC */
 
 /* Exported macro ------------------------------------------------------------*/

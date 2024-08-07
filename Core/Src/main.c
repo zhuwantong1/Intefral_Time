@@ -26,7 +26,9 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "retarget.h"
+#include "AD9268.h"
+#include "usbd_cdc_if.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -47,19 +49,20 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+uint8_t G_AdcValue_U8[2000] = {0};
+uint8_t Final_Results[2000] = {0};
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 void PeriphCommonClock_Config(void);
 /* USER CODE BEGIN PFP */
-
+void Data_Conversion(int j);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+extern USBD_HandleTypeDef hUsbDeviceHS;
 /* USER CODE END 0 */
 
 /**
@@ -98,18 +101,42 @@ int main(void)
   MX_TIM3_Init();
   MX_USART1_UART_Init();
   MX_USB_DEVICE_Init();
+  MX_TIM1_Init();
+  MX_TIM4_Init();
   /* USER CODE BEGIN 2 */
+    RetargetInit(&huart1);
+
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
+    Init_AD9268();
+    HAL_Delay(100);
+    HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
+    HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL);
+
+
+
+    while (1)
   {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+    if(G_Count>=199)
+    {
+        //__disable_irq();
+        for(int i = 0;i<1599;i+=8){//这里也就转换200个数据，循环200次
+            Data_Conversion(i);
+        }
+
+        //memcpy(G_AdcValue_U8,G_AdcValue,2000);
+        CDC_Transmit_HS(Final_Results, 1600);
+        G_Count=0;
+    }
+      //__enable_irq();
   }
+
   /* USER CODE END 3 */
 }
 
@@ -199,7 +226,24 @@ void PeriphCommonClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+void Data_Conversion(int j)
+{
+    Final_Results[j]   = (uint8_t)(G_AdcValue[j/8] & 0xFF);
+    Final_Results[j+1] = (uint8_t)((G_AdcValue[j/8] >> 8) & 0xFF);
+    Final_Results[j+2] = (uint8_t)(G_Encoder[j/8] & 0xFF);
+    Final_Results[j+3] = (uint8_t)((G_Encoder[j/8] >> 8) & 0xFF);
+    if(G_Encoder[j]>50000)
+    {
+        Final_Results[j+4] = 0xff;
+        Final_Results[j+5] = 0xff;
+    }else
+    {
+        Final_Results[j+4] = 0x00;
+        Final_Results[j+5] = 0x00;
+    }
+    Final_Results[j+6] = 0x0D;
+    Final_Results[j+7] = 0xFF;
+}
 /* USER CODE END 4 */
 
 /**

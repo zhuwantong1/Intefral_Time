@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/Integral_PMT.elf.dir/Core/Src/AD9268.c.obj"
+  "CMakeFiles/Integral_PMT.elf.dir/Core/Src/AD9268.c.obj.d"
   "CMakeFiles/Integral_PMT.elf.dir/Core/Src/gpio.c.obj"
   "CMakeFiles/Integral_PMT.elf.dir/Core/Src/gpio.c.obj.d"
   "CMakeFiles/Integral_PMT.elf.dir/Core/Src/main.c.obj"

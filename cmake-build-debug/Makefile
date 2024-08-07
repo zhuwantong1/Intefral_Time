@@ -128,6 +128,30 @@ Integral_PMT.elf/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Integral_PMT.elf.dir\build.make CMakeFiles/Integral_PMT.elf.dir/build
 .PHONY : Integral_PMT.elf/fast
 
+Core/Src/AD9268.obj: Core/Src/AD9268.c.obj
+.PHONY : Core/Src/AD9268.obj
+
+# target to build an object file
+Core/Src/AD9268.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Integral_PMT.elf.dir\build.make CMakeFiles/Integral_PMT.elf.dir/Core/Src/AD9268.c.obj
+.PHONY : Core/Src/AD9268.c.obj
+
+Core/Src/AD9268.i: Core/Src/AD9268.c.i
+.PHONY : Core/Src/AD9268.i
+
+# target to preprocess a source file
+Core/Src/AD9268.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Integral_PMT.elf.dir\build.make CMakeFiles/Integral_PMT.elf.dir/Core/Src/AD9268.c.i
+.PHONY : Core/Src/AD9268.c.i
+
+Core/Src/AD9268.s: Core/Src/AD9268.c.s
+.PHONY : Core/Src/AD9268.s
+
+# target to generate assembly for a file
+Core/Src/AD9268.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Integral_PMT.elf.dir\build.make CMakeFiles/Integral_PMT.elf.dir/Core/Src/AD9268.c.s
+.PHONY : Core/Src/AD9268.c.s
+
 Core/Src/gpio.obj: Core/Src/gpio.c.obj
 .PHONY : Core/Src/gpio.obj
 
@@ -1201,6 +1225,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... Integral_PMT.elf
+	@echo ... Core/Src/AD9268.obj
+	@echo ... Core/Src/AD9268.i
+	@echo ... Core/Src/AD9268.s
 	@echo ... Core/Src/gpio.obj
 	@echo ... Core/Src/gpio.i
 	@echo ... Core/Src/gpio.s
